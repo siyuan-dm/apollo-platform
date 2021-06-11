@@ -34,4 +34,5 @@
 #* 
 #* Author: Eitan Marder-Eppstein
 #***********************************************************
-from _tf2 import *
+from __future__ import absolute_import
+from ._tf2 import *

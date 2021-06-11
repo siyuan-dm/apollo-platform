@@ -32,6 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/uio.h>
+
 #include "ros/transport/transport_udp.h"
 #include "ros/poll_set.h"
 #include "ros/file_log.h"

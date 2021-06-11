@@ -55,14 +55,14 @@ include(${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/rosconsole-extras.cma
 
 # See ticket: https://code.ros.org/trac/ros/ticket/3626
 # On mac use g++-4.2
-IF(${CMAKE_SYSTEM} MATCHES "Darwin-11.*")
-  IF(EXISTS "/usr/bin/g++-4.2")
-    set(CMAKE_CXX_COMPILER /usr/bin/g++-4.2)
-  ELSE(EXISTS "/usr/bin/g++-4.2")
-    # If there is no g++-4.2 use clang++
-    set(CMAKE_CXX_COMPILER /usr/bin/clang++)
-  ENDIF(EXISTS "/usr/bin/g++-4.2")
-ENDIF(${CMAKE_SYSTEM} MATCHES "Darwin-11.*")
+# IF(${CMAKE_SYSTEM} MATCHES "Darwin-11.*")
+#   IF(EXISTS "/usr/bin/g++-4.2")
+#     set(CMAKE_CXX_COMPILER /usr/bin/g++-4.2)
+#   ELSE(EXISTS "/usr/bin/g++-4.2")
+#     # If there is no g++-4.2 use clang++
+#     set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+#   ENDIF(EXISTS "/usr/bin/g++-4.2")
+# ENDIF(${CMAKE_SYSTEM} MATCHES "Darwin-11.*")
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${rosconsole_backend_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
