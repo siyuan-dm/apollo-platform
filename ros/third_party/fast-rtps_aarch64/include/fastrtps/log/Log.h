@@ -42,7 +42,7 @@
 //! Logs a warning. Disable reporting through Log::SetVerbosity or #define LOG_NO_WARNING
 #define logWarning(cat,msg) logWarning_(cat,msg)
 //! Logs an error. Disable reporting through #define LOG_NO_ERROR
-#define logError(cat,msg) logError_(cat,msg)
+#define CONSOLE_BRIDGE_logError(cat,msg) logError_(cat,msg)
 
 namespace eprosima {
 namespace fastrtps {
@@ -116,7 +116,7 @@ public:
     * Not recommended to call this method directly! Use the following macros:
     *  * logInfo(cat, msg);
     *  * logWarning(cat, msg);
-    *  * logError(cat, msg);
+    *  * CONSOLE_BRIDGE_logError(cat, msg);
     */
    RTPS_DllAPI static void QueueLog(const std::string& message, const Log::Context&, Log::Kind);
 

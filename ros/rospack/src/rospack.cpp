@@ -250,7 +250,7 @@ Rosstackage::~Rosstackage()
 
 void Rosstackage::clearStackages()
 {
-  for(std::tr1::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
+  for(boost::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
       it != stackages_.end();
       ++it)
   {
@@ -261,13 +261,13 @@ void Rosstackage::clearStackages()
 }
 
 void
-Rosstackage::logWarn(const std::string& msg,
+Rosstackage::CONSOLE_BRIDGE_logWarn(const std::string& msg,
                      bool append_errno)
 {
   log("Warning", msg, append_errno);
 }
 void
-Rosstackage::logError(const std::string& msg,
+Rosstackage::CONSOLE_BRIDGE_logError(const std::string& msg,
                       bool append_errno)
 {
   log("Error", msg, append_errno);
@@ -317,7 +317,7 @@ Rosstackage::isStackage(const std::string& path)
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("error while looking at ") + path + ": " + e.what());
+    CONSOLE_BRIDGE_logWarn(std::string("error while looking at ") + path + ": " + e.what());
     return false;
   }
 
@@ -340,7 +340,7 @@ Rosstackage::isStackage(const std::string& path)
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("error while crawling ") + path + ": " + e.what());
+    CONSOLE_BRIDGE_logWarn(std::string("error while crawling ") + path + ": " + e.what());
   }
   return false;
 }
@@ -373,7 +373,7 @@ Rosstackage::crawl(std::vector<std::string> search_path,
   search_paths_ = search_path;
 
   std::vector<DirectoryCrawlRecord*> dummy;
-  std::tr1::unordered_set<std::string> dummy2;
+  boost::unordered_set<std::string> dummy2;
   for(std::vector<std::string>::const_iterator p = search_paths_.begin();
       p != search_paths_.end();
       ++p)
@@ -438,7 +438,7 @@ Rosstackage::contents(const std::string& name,
                       std::set<std::string>& packages)
 {
   Rospack rp2;
-  std::tr1::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.find(name);
+  boost::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.find(name);
   if(it != stackages_.end())
   {
     std::vector<std::string> search_paths;
@@ -454,7 +454,7 @@ Rosstackage::contents(const std::string& name,
   }
   else
   {
-    logError(std::string("stack ") + name + " not found");
+    CONSOLE_BRIDGE_logError(std::string("stack ") + name + " not found");
     return false;
   }
 }
@@ -465,7 +465,7 @@ Rosstackage::contains(const std::string& name,
                       std::string& path)
 {
   Rospack rp2;
-  for(std::tr1::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
+  for(boost::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
       it != stackages_.end();
       ++it)
   {
@@ -487,14 +487,14 @@ Rosstackage::contains(const std::string& name,
     }
   }
 
-  logError(std::string("stack containing package ") + name + " not found");
+  CONSOLE_BRIDGE_logError(std::string("stack containing package ") + name + " not found");
   return false;
 }
 
 void
 Rosstackage::list(std::set<std::pair<std::string, std::string> >& list)
 {
-  for(std::tr1::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
+  for(boost::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
       it != stackages_.end();
       ++it)
   {
@@ -510,7 +510,7 @@ Rosstackage::listDuplicates(std::vector<std::string>& dups)
 {
   dups.resize(dups_.size());
   int i = 0;
-  for(std::tr1::unordered_map<std::string, std::vector<std::string> >::const_iterator it = dups_.begin();
+  for(boost::unordered_map<std::string, std::vector<std::string> >::const_iterator it = dups_.begin();
       it != dups_.end();
       ++it)
   {
@@ -523,7 +523,7 @@ void
 Rosstackage::listDuplicatesWithPaths(std::map<std::string, std::vector<std::string> >& dups)
 {
   dups.clear();
-  for(std::tr1::unordered_map<std::string, std::vector<std::string> >::const_iterator it = dups_.begin();
+  for(boost::unordered_map<std::string, std::vector<std::string> >::const_iterator it = dups_.begin();
       it != dups_.end();
       ++it)
   {
@@ -589,7 +589,7 @@ Rosstackage::depsIndent(const std::string& name, bool direct,
   {
     computeDeps(stackage);
     std::vector<Stackage*> deps_vec;
-    std::tr1::unordered_set<Stackage*> deps_hash;
+    boost::unordered_set<Stackage*> deps_hash;
     std::vector<std::string> indented_deps;
     gatherDepsFull(stackage, direct, POSTORDER, 0, deps_hash, deps_vec, true, indented_deps);
     for(std::vector<std::string>::const_iterator it = indented_deps.begin();
@@ -599,7 +599,7 @@ Rosstackage::depsIndent(const std::string& name, bool direct,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -624,7 +624,7 @@ Rosstackage::depsWhy(const std::string& from,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return true;
   }
   output.append(std::string("Dependency chains from ") +
@@ -666,7 +666,7 @@ Rosstackage::depsManifests(const std::string& name, bool direct,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -713,7 +713,7 @@ Rosstackage::rosdeps(const std::string& name, bool direct,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -788,7 +788,7 @@ Rosstackage::vcs(const std::string& name, bool direct,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -899,7 +899,7 @@ Rosstackage::cpp_exports(const std::string& name, const std::string& type,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -996,7 +996,7 @@ Rosstackage::exports(const std::string& name, const std::string& lang,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -1024,7 +1024,7 @@ Rosstackage::exports_dry_package(Stackage* stackage, const std::string& lang,
         if(g_ros_os == std::string(os_str))
         {
           if(os_match)
-            logWarn(std::string("ignoring duplicate ") + lang + " tag with os=" + os_str + " in export block");
+            CONSOLE_BRIDGE_logWarn(std::string("ignoring duplicate ") + lang + " tag with os=" + os_str + " in export block");
           else
           {
             best_match = ele2->Attribute(attrib.c_str());
@@ -1037,7 +1037,7 @@ Rosstackage::exports_dry_package(Stackage* stackage, const std::string& lang,
         if(!best_match)
           best_match = ele2->Attribute(attrib.c_str());
         else
-          logWarn(std::string("ignoring duplicate ") + lang + " tag in export block");
+          CONSOLE_BRIDGE_logWarn(std::string("ignoring duplicate ") + lang + " tag in export block");
       }
 
     }
@@ -1080,7 +1080,7 @@ Rosstackage::plugins(const std::string& name, const std::string& attrib,
   if(!depsOnDetail(name, true, stackages, true))
     return false;
   // Also look in the package itself
-  std::tr1::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.find(name);
+  boost::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.find(name);
   if(it != stackages_.end())
   {
     // don't warn here; it was done in depsOnDetail()
@@ -1093,7 +1093,7 @@ Rosstackage::plugins(const std::string& name, const std::string& attrib,
     std::vector<Stackage*> top_deps;
     if(!depsDetail(top, false, top_deps))
       return false;
-    std::tr1::unordered_set<Stackage*> top_deps_set;
+    boost::unordered_set<Stackage*> top_deps_set;
     for(std::vector<Stackage*>::iterator it = top_deps.begin();
         it != top_deps.end();
         ++it)
@@ -1166,7 +1166,7 @@ Rosstackage::depsMsgSrv(const std::string& name, bool direct,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -1204,7 +1204,7 @@ Rosstackage::findWithRecrawl(const std::string& name)
       return stackages_[name];
   }
 
-  logError(get_manifest_type() + " '" + name + "' not found");
+  CONSOLE_BRIDGE_logError(get_manifest_type() + " '" + name + "' not found");
   return NULL;
 }
 
@@ -1216,7 +1216,7 @@ Rosstackage::depsDetail(const std::string& name, bool direct,
   // top level to do it.
   if(!stackages_.count(name))
   {
-    logError(std::string("no such package ") + name);
+    CONSOLE_BRIDGE_logError(std::string("no such package ") + name);
     return false;
   }
   Stackage* stackage = stackages_[name];
@@ -1232,7 +1232,7 @@ Rosstackage::depsDetail(const std::string& name, bool direct,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -1278,12 +1278,12 @@ Rosstackage::depsOnDetail(const std::string& name, bool direct,
   // start.
   if(!stackages_.count(name))
   {
-    logError(std::string("no such package ") + name);
+    CONSOLE_BRIDGE_logError(std::string("no such package ") + name);
     return false;
   }
   try
   {
-    for(std::tr1::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
+    for(boost::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
         it != stackages_.end();
         ++it)
     {
@@ -1304,7 +1304,7 @@ Rosstackage::depsOnDetail(const std::string& name, bool direct,
   }
   catch(Exception& e)
   {
-    logError(e.what());
+    CONSOLE_BRIDGE_logError(e.what());
     return false;
   }
   return true;
@@ -1318,7 +1318,7 @@ Rosstackage::profile(const std::vector<std::string>& search_path,
 {
   double start = time_since_epoch();
   std::vector<DirectoryCrawlRecord*> dcrs;
-  std::tr1::unordered_set<std::string> dcrs_hash;
+  boost::unordered_set<std::string> dcrs_hash;
   for(std::vector<std::string>::const_iterator p = search_path.begin();
       p != search_path.end();
       ++p)
@@ -1428,7 +1428,7 @@ Rosstackage::crawlDetail(const std::string& path,
                          int depth,
                          bool collect_profile_data,
                          std::vector<DirectoryCrawlRecord*>& profile_data,
-                         std::tr1::unordered_set<std::string>& profile_hash)
+                         boost::unordered_set<std::string>& profile_hash)
 {
   if(depth > MAX_CRAWL_DEPTH)
     throw Exception("maximum depth exceeded during crawl");
@@ -1440,7 +1440,7 @@ Rosstackage::crawlDetail(const std::string& path,
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("error while looking at ") + path + ": " + e.what());
+    CONSOLE_BRIDGE_logWarn(std::string("error while looking at ") + path + ": " + e.what());
     return;
   }
 
@@ -1452,7 +1452,7 @@ Rosstackage::crawlDetail(const std::string& path,
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("error while looking for ") + catkin_ignore.string() + ": " + e.what());
+    CONSOLE_BRIDGE_logWarn(std::string("error while looking for ") + catkin_ignore.string() + ": " + e.what());
   }
 
   if(isStackage(path))
@@ -1469,7 +1469,7 @@ Rosstackage::crawlDetail(const std::string& path,
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("error while looking for ") + nosubdirs.string() + ": " + e.what());
+    CONSOLE_BRIDGE_logWarn(std::string("error while looking for ") + nosubdirs.string() + ": " + e.what());
   }
 
   // We've already checked above whether CWD contains the kind of manifest
@@ -1483,7 +1483,7 @@ Rosstackage::crawlDetail(const std::string& path,
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("error while looking for ") + rospack_manifest.string() + ": " + e.what());
+    CONSOLE_BRIDGE_logWarn(std::string("error while looking for ") + rospack_manifest.string() + ": " + e.what());
   }
 
   DirectoryCrawlRecord* dcr = NULL;
@@ -1524,7 +1524,7 @@ Rosstackage::crawlDetail(const std::string& path,
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("error while crawling ") + path + ": " + e.what());
+    CONSOLE_BRIDGE_logWarn(std::string("error while crawling ") + path + ": " + e.what());
   }
 
   if(collect_profile_data && dcr != NULL)
@@ -1777,7 +1777,7 @@ Rosstackage::gatherDeps(Stackage* stackage, bool direct,
                         std::vector<Stackage*>& deps,
                         bool no_recursion_on_wet)
 {
-  std::tr1::unordered_set<Stackage*> deps_hash;
+  boost::unordered_set<Stackage*> deps_hash;
   std::vector<std::string> indented_deps;
   gatherDepsFull(stackage, direct, order, 0,
                  deps_hash, deps, false, indented_deps, no_recursion_on_wet);
@@ -1786,7 +1786,7 @@ Rosstackage::gatherDeps(Stackage* stackage, bool direct,
 void
 _gatherDepsFull(Stackage* stackage, bool direct,
                             traversal_order_t order, int depth,
-                            std::tr1::unordered_set<Stackage*>& deps_hash,
+                            boost::unordered_set<Stackage*>& deps_hash,
                             std::vector<Stackage*>& deps,
                             bool get_indented_deps,
                             std::vector<std::string>& indented_deps,
@@ -1872,7 +1872,7 @@ _gatherDepsFull(Stackage* stackage, bool direct,
 void
 Rosstackage::gatherDepsFull(Stackage* stackage, bool direct,
                             traversal_order_t order, int depth,
-                            std::tr1::unordered_set<Stackage*>& deps_hash,
+                            boost::unordered_set<Stackage*>& deps_hash,
                             std::vector<Stackage*>& deps,
                             bool get_indented_deps,
                             std::vector<std::string>& indented_deps,
@@ -1931,7 +1931,7 @@ Rosstackage::getCachePath()
   }
   catch(fs::filesystem_error& e)
   {
-    logWarn(std::string("cannot create rospack cache directory ") +
+    CONSOLE_BRIDGE_logWarn(std::string("cannot create rospack cache directory ") +
             cache_path.string() + ": " + e.what());
   }
   cache_path /= cache_prefix_ + "_" + getCacheHash();
@@ -1990,7 +1990,7 @@ Rosstackage::writeCache()
   std::string cache_path = getCachePath();
   if(!cache_path.size())
   {
-    logWarn("no location available to write cache file. Try setting ROS_HOME or HOME.");
+    CONSOLE_BRIDGE_logWarn("no location available to write cache file. Try setting ROS_HOME or HOME.");
   }
   else
   {
@@ -2018,7 +2018,7 @@ Rosstackage::writeCache()
     int fd = open(tmp_cache_path, O_RDWR | O_EXCL | _O_CREAT, 0644);
     if (fd < 0)
     {
-      logWarn(std::string("unable to create temporary cache file ") +
+      CONSOLE_BRIDGE_logWarn(std::string("unable to create temporary cache file ") +
                    tmp_cache_path, true);
     }
     else
@@ -2054,7 +2054,7 @@ Rosstackage::writeCache()
       {
         char *rpp = getenv("ROS_PACKAGE_PATH");
         fprintf(cache, "#ROS_PACKAGE_PATH=%s\n", (rpp ? rpp : ""));
-        for(std::tr1::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
+        for(boost::unordered_map<std::string, Stackage*>::const_iterator it = stackages_.begin();
             it != stackages_.end();
             ++it)
           fprintf(cache, "%s\n", it->second->path_.c_str());
@@ -2183,7 +2183,7 @@ Rosstackage::expandExportString(Stackage* stackage,
             std::string("failed to execute backquote expression ") +
             cmd + " in " +
             stackage->manifest_path_;
-    logWarn(errmsg, true);
+    CONSOLE_BRIDGE_logWarn(errmsg, true);
     return false;
   }
   else

@@ -76,7 +76,7 @@ Changelog for package class_loader
 
 0.2.3 (2013-08-21)
 ------------------
-* fix missing class name in logWarn output
+* fix missing class name in CONSOLE_BRIDGE_logWarn output
 
 0.2.2 (2013-07-14)
 ------------------
@@ -109,7 +109,7 @@ Changelog for package class_loader
 
 0.1.24 (2013-01-14 15:27)
 -------------------------
-* fix syntax error for logInform
+* fix syntax error for CONSOLE_BRIDGE_logInform
 
 0.1.23 (2013-01-14 15:23)
 -------------------------

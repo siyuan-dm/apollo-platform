@@ -40,7 +40,7 @@
 
 // C++ constexpr support
 #ifndef HAVE_CXX_CONSTEXPR
-#define HAVE_CXX_CONSTEXPR 0
+#define HAVE_CXX_CONSTEXPR 1
 #endif
 
 #if HAVE_CXX_CONSTEXPR

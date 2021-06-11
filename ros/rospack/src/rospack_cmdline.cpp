@@ -75,7 +75,7 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
 
   if(!command.size())
   {
-    rp.logError( std::string("no command given.  Try '") + rp.getName() + " help'");
+    rp.CONSOLE_BRIDGE_logError( std::string("no command given.  Try '") + rp.getName() + " help'");
     return true;
   }
   // For some commands, we force a crawl.  Definitely anything that does a
@@ -201,7 +201,7 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
     if(package_given || target.size() || top.size() ||
        deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> dirs;
@@ -222,13 +222,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError(std::string("no ") + rp.get_manifest_type() + " given");
+      rp.CONSOLE_BRIDGE_logError(std::string("no ") + rp.get_manifest_type() + " given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::string path;
@@ -243,7 +243,7 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
     if(package_given || target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::set<std::pair<std::string, std::string> > list;
@@ -262,7 +262,7 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
     if(package_given || target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::set<std::pair<std::string, std::string> > list;
@@ -281,7 +281,7 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
     if(package_given || target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::map<std::string, std::vector<std::string> > dups;
@@ -307,7 +307,7 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
     if(package_given || target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> deps;
@@ -354,13 +354,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError(std::string("no ") + rp.get_manifest_type() + " given");
+      rp.CONSOLE_BRIDGE_logError(std::string("no ") + rp.get_manifest_type() + " given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> deps;
@@ -377,13 +377,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError(std::string("no ") + rp.get_manifest_type() + " given");
+      rp.CONSOLE_BRIDGE_logError(std::string("no ") + rp.get_manifest_type() + " given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> manifests;
@@ -406,13 +406,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> gens;
@@ -434,13 +434,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError(std::string("no ") + rp.get_manifest_type() + " given");
+      rp.CONSOLE_BRIDGE_logError(std::string("no ") + rp.get_manifest_type() + " given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> deps;
@@ -457,13 +457,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size() || !target.size())
     {
-      rp.logError(std::string("no ") + rp.get_manifest_type() + " or target given");
+      rp.CONSOLE_BRIDGE_logError(std::string("no ") + rp.get_manifest_type() + " or target given");
       return false;
     }
     if(top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::string why_output;
@@ -480,13 +480,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::set<std::string> rosdeps;
@@ -505,13 +505,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> vcs;
@@ -529,13 +529,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError(std::string("no ") + rp.get_manifest_type() + " given");
+      rp.CONSOLE_BRIDGE_logError(std::string("no ") + rp.get_manifest_type() + " given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> deps;
@@ -552,12 +552,12 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size() || !lang.size() || !attrib.size())
     {
-      rp.logError( "no package / lang / attrib given");
+      rp.CONSOLE_BRIDGE_logError( "no package / lang / attrib given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() || zombie_only)
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> flags;
@@ -579,12 +579,12 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size() || !attrib.size())
     {
-      rp.logError( "no package / attrib given");
+      rp.CONSOLE_BRIDGE_logError( "no package / attrib given");
       return false;
     }
     if(target.size() || length_str.size() || zombie_only)
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::string> flags;
@@ -601,12 +601,12 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() || zombie_only)
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::pair<std::string, bool> > flags;
@@ -643,12 +643,12 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() || zombie_only)
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::pair<std::string, bool> > flags;
@@ -673,12 +673,12 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() || zombie_only)
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::pair<std::string, bool> > flags;
@@ -715,12 +715,12 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() || zombie_only)
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::pair<std::string, bool> > flags;
@@ -745,12 +745,12 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() || zombie_only)
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::vector<std::pair<std::string, bool> > flags;
@@ -777,13 +777,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no stack given");
+      rp.CONSOLE_BRIDGE_logError( "no stack given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
 
@@ -801,13 +801,13 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   {
     if(!package.size())
     {
-      rp.logError( "no package given");
+      rp.CONSOLE_BRIDGE_logError( "no package given");
       return false;
     }
     if(target.size() || top.size() || length_str.size() ||
        zombie_only || deps_only || lang.size() || attrib.size())
     {
-      rp.logError( "invalid option(s) given");
+      rp.CONSOLE_BRIDGE_logError( "invalid option(s) given");
       return false;
     }
     std::string name, path;
@@ -821,7 +821,7 @@ rospack_run(int argc, char** argv, rospack::Rosstackage& rp, std::string& output
   }
   else
   {
-    rp.logError(std::string("command ") + command + " not implemented");
+    rp.CONSOLE_BRIDGE_logError(std::string("command ") + command + " not implemented");
     return false;
   }
 }
@@ -853,7 +853,7 @@ parse_args(int argc, char** argv,
   }
   catch(boost::program_options::error e)
   {
-    rp.logError( std::string("failed to parse command-line options: ") + e.what());
+    rp.CONSOLE_BRIDGE_logError( std::string("failed to parse command-line options: ") + e.what());
     return false;
   }
   po::notify(vm);

@@ -100,7 +100,7 @@ class TopicAttributes
             if(resourceLimitsQos.max_samples_per_instance > resourceLimitsQos.max_samples && topicKind == WITH_KEY)
             {
 
-                logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"):max_samples_per_instance must be <= than max_samples");
+                CONSOLE_BRIDGE_logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"):max_samples_per_instance must be <= than max_samples");
                 return false;
             }
             if(resourceLimitsQos.max_samples_per_instance*resourceLimitsQos.max_instances > resourceLimitsQos.max_samples && topicKind == WITH_KEY)
@@ -109,23 +109,23 @@ class TopicAttributes
             {
                 if(historyQos.depth > resourceLimitsQos.max_samples)
                 {
-                    logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): depth must be <= max_samples");
+                    CONSOLE_BRIDGE_logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): depth must be <= max_samples");
                     return false;
                 }
                 if(historyQos.depth > resourceLimitsQos.max_samples_per_instance && topicKind == WITH_KEY)
                 {
-                    logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): depth must be <= max_samples_per_instance");
+                    CONSOLE_BRIDGE_logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): depth must be <= max_samples_per_instance");
                     return false;
                 }
                 if(historyQos.depth <=0 )
                 {
-                    logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): depth must be > 0");
+                    CONSOLE_BRIDGE_logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): depth must be > 0");
                     return false;
                 }
             }
             if(resourceLimitsQos.max_samples != 0 && resourceLimitsQos.allocated_samples > resourceLimitsQos.max_samples)
             {
-                logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): max_samples < allocated_samples");
+                CONSOLE_BRIDGE_logError(RTPS_QOS_CHECK,"INCORRECT TOPIC QOS ("<< topicName <<"): max_samples < allocated_samples");
                 return false;
             }
             return true;
