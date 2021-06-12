@@ -50,7 +50,7 @@ RUN rm -rf opencv opencv_contrib
 # Install gtest library
 RUN cd /usr/src/gtest && cmake CMakeLists.txt && make -j$(($(nproc)-1)) && cp *.a /usr/lib
 
-# Install apollo ros third_party 
+# Install apollo ros third_party, mainly Fask-RTPS
 RUN git clone https://github.com/siyuan-dm/apollo-platform.git
 RUN cd apollo-platform/ros && ./build.sh clean
 RUN rm -rf apollo-platform/ros/third_party/fast-rtps
