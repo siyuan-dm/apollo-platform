@@ -45,10 +45,10 @@ function build() {
     rm -rf fast-rtps/include/*
     rm -rf fast-rtps/lib/*
 
-    cp -fr Fast-RTPS/build/install/include/* ${INSTALL_PATH}/include/
+    mkdir -p ${INSTALL_PATH}/include/ && cp -fr Fast-RTPS/build/install/include/* ${INSTALL_PATH}/include/
     cp -fr Fast-RTPS/build/external/install/include/* ${INSTALL_PATH}/include/
 
-    cp -fr Fast-RTPS/build/install/lib/* ${INSTALL_PATH}/lib/
+    mkdir -p ${INSTALL_PATH}/lib/ && cp -fr Fast-RTPS/build/install/lib/* ${INSTALL_PATH}/lib/
     cp -fr Fast-RTPS/build/external/install/lib/* ${INSTALL_PATH}/lib/
 
     rm -rf Fast-RTPS
